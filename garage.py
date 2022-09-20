@@ -23,7 +23,7 @@ class VehicleDetails:
             return False
     def __str__(self):
         return '\t'.join(str(a) for a in [self._make, self._model, self._year, self._color, self._mileage])
-    def fixVehicle(self):
+    def fix_vehicle(self):
         cost = 100
         if self._mileage > 10000 or self._year > 2005:
             cost = 1000
@@ -47,7 +47,7 @@ class Car_Inventory:
             print(idx + 1, end='\t')
             print(vehicle)
 
-    def fixVehicle(self, index):
+    def fix_vehicle(self, index):
         return self.cars[index].fixVehicle()
 
 inventory = Car_Inventory()
@@ -104,8 +104,8 @@ while True:
             print('Sorry there are no vehicles currently in inventory')
             continue
         Products = int(input("Which vehicle do you need repairing?: "))
-        print('The price for ')
-        print(inventory.fixVehicle)
+        print('The price for repair will be: ')
+        print(inventory.fix_vehicle[0])
         
     elif User_Choice == '6':
         # Exits the loop and ends the program
