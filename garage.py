@@ -17,8 +17,8 @@ class Vehicle_Screen:
         except ValueError:
             print('Please try entering vehicle information again using only whole numbers for mileage and year')
             return False
-    # def __str__(self):
-    #     return '\t'.join(str(a) for a in [self._make, self._model, self._year, self._color, self._mileage])
+    def __str__(self):
+        return '\t'.join(str(a) for a in [self._make, self._model, self._year, self._color, self._mileage])
 
 class Car_Inventory:
     def __init__(self):
@@ -34,9 +34,7 @@ class Car_Inventory:
         for idx, vehicle in enumerate(self.cars):
             print(idx + 1, end='\t')
             print(vehicle)
-    def fixVehicle(self):
-        cost = 150
-
+            
 inventory = Car_Inventory()
 while True:
 
