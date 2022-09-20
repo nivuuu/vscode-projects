@@ -1,10 +1,14 @@
-print('Vehicle Inventory')
-class Vehicle_Screen:
+""" Eryk A Grabowski                            20/09/2022 """
+print('==================================')
+print('|------Welcome to the Garage-----|')
+print('==================================')
+class VehicleDetails:
+    """ Class for vehicle creation """
     def __init__(self):
-        self._make = ''
-        self._model = ''
+        self._make = " "
+        self._model = " "
         self._year = 0
-        self._color = ''
+        self._color = " "
         self._mileage = 0
     def add_car(self):
         try:
@@ -19,30 +23,42 @@ class Vehicle_Screen:
             return False
     def __str__(self):
         return '\t'.join(str(a) for a in [self._make, self._model, self._year, self._color, self._mileage])
-
+    def fixVehicle(self):
+        cost = 100
+        if self._mileage > 10000 or self._year > 2005:
+            cost = 1000
+        else:
+            cost = 100
+        return cost
 class Car_Inventory:
+    """ Class for the storing of vehicle data """
     def __init__(self):
         self.cars = []
     def add_car(self):
-        vehicle = Vehicle_Screen()
+        vehicle = VehicleDetails()
         if vehicle.add_car() == True:
             self.cars.append(vehicle)
             print ()
             print('This vehicle has been added, Thank you')
-    def Display_Car_Inventory(self):
-        print('\t'.join(['', 'Make', 'Model', 'Year', 'Color', 'Mileage']))
+    # Displays a table containing the data for each vehicle in the list
+    def display_Car_Inventory(self):
+        print('\t'.join(["", 'Make', 'Model', 'Year', 'Color', 'Mileage']))
         for idx, vehicle in enumerate(self.cars):
             print(idx + 1, end='\t')
             print(vehicle)
-            
+
+    def fixVehicle(self, index):
+        return self.cars[index].fixVehicle()
+
 inventory = Car_Inventory()
 while True:
 
-    print('Choice 1: Add Vehicle to Inventory')
-    print('Choice 2: Delete Vehicle from Inventory')
+    print('Choice 1: Add Vehicle to Garage')
+    print('Choice 2: Delete Vehicle from Garage')
     print('Choice 3: View Current Inventory')
-    print('Choice 4: Update Vehicle in Inventory')
-    print('Choice 5: Quit')
+    print('Choice 4: Update Vehicle in Garage')
+    print('Choice 5: Repair Quote')
+    print('Choice 6: Quit')
     User_Choice=input('Please Enter your Choice from one of the above options: ')
     if User_Choice== "1":
         # Adding a vehicle to the list
@@ -52,7 +68,7 @@ while True:
         if len(inventory.cars) < 1:
             print('Sorry there are no vehicles currently in inventory')
             continue
-        inventory.Display_Car_Inventory()
+        inventory.display_Car_Inventory()
         Products = int(input('Please enter the number associated with the vehicle to be removed: '))
         if Products - 1  > len(inventory.cars):
             print('This is an invalid number')
@@ -65,25 +81,34 @@ while True:
         if len(inventory.cars) < 1:
             print('Sorry there are no vehicles currently in inventory')
             continue
-        inventory.Display_Car_Inventory()
+        inventory.display_Car_Inventory()
     elif User_Choice == '4':
         # Edit of an existing vehicle in the list
         if len(inventory.cars) < 1:
             print('Sorry there are no vehicles currently in inventory')
             continue
-        inventory.Display_Car_Inventory()
+        inventory.display_Car_Inventory()
         Products = int(input('Please enter the number associated with the vehicle to be updated: '))
         if Products - 1  > len(inventory.cars):
             print('This is an invalid number')
         else:
-            auto_vehicle = Vehicle_Screen()
+            auto_vehicle = VehicleDetails()
             if auto_vehicle.add_car() == True :
                 inventory.cars.remove(inventory.cars[Products - 1])
                 inventory.cars.insert(Products - 1, auto_vehicle)
                 print ()
                 print('This vehicle has been updated')
+        # Allows user to get a quote for the cost of a repair on a vehicle
     elif User_Choice == '5':
-        # Exits the loop and ends the interaction
+        if len(inventory.cars) < 1:
+            print('Sorry there are no vehicles currently in inventory')
+            continue
+        Products = int(input("Which vehicle do you need repairing?: "))
+        print('The price for ')
+        print(inventory.fixVehicle)
+        
+    elif User_Choice == '6':
+        # Exits the loop and ends the program
         print('See you later!')
         break
     else:
